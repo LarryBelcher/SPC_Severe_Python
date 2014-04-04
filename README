@@ -1,0 +1,78 @@
+README for the SPC Historical Probability of Severe Weather data visualization
+
+
+Abstract:
+Three python scripts are contained in this project that display the SPC Historical 
+Probabiliy od Severe Weather data onto a map (Albers Equal Area Conic for CONUS region).
+
+Data Provider: NOAA Storm Prediction Center, National Severe Storms Laboratory
+Dataset: http://www.spc.noaa.gov/new/SVRclimo/climo.php?parm=anySvr
+
+
+Python script listing:
+
+SevereDriver.py	- Drives the mapping and colorbar scripts
+
+SevereMap.py	- Creates a map image of the data
+
+SevereColorbar.py	- Creates a corresponding colorbar
+
+
+Program Usage:
+
+Image production begins by executing SevereDriver.py, which will create a daily image of 
+a desired size. The possible image sizes (in pixel width) include 620px, 1000px, 4096px 
+(DIY), 1920px (HD, or HDSD). An example call to the driver routine routine:
+
+“path to python”  SevereDriver.py “day of year” “image size”
+
+e.g., 
+/usr/bin/python  SevereDriver.py 140 DIY
+
+
+Valid “image size” values are:
+620 (620px wide image)
+1000 (1000px wide image)
+DIY (4096px wide image)
+HD (1920px wide image in high definition)
+HDSD (1920px wide image suitable for either high definition or standard definition
+
+Valid day of year values range from 1 through 366 (includes Feb 29, i.e., leap year)
+
+Software and Dependencies:
+
+The scripts included here were built for Python 2.7. The following
+modules must exist on the system for them to perform correctly:
+
+matplotlib-1.1.1 (or higher)
+PIL (python imaging library, 1.1.7 or higher, PIL is the Python Imaging Library)
+mpl_toolkits.basemap
+numpy
+sys
+os
+subprocess
+time
+matplotlib.font_manager (in order to utilize the true type font MS Trebuchet, which is not
+	included as a "base" font in python*)
+	*The usage of PIL and the font manager inside matplotlib in these scripts requires
+	the ability to utilize true type fonts. As such for example on a linux box, one would
+	need to have installed the freetype-dev packages. Specifically, libfreetype6-dev needs
+	to be installed on ubuntu... 
+
+Other files in this project:
+colorbar and logo (.png and .eps) files included here are sized for each of the image 
+sizes and are used by the various python scripts that produce the reprojected images
+
+
+
+Notes on portability:
+
+1) All image making scripts in the project need the path to Trebuchet MS true-type font.
+e.g.,
+
+	/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf
+
+	*This path depends entirely on the location the sysadmin installs “add-on” fonts.
+
+
+
