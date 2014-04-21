@@ -51,13 +51,13 @@ if(imgsize == '620'):
 	figdpi = 72
 	fsiz1 = 12
 	fsiz2 = 11
-	cbx = 0.171; cbw = 0.658; cby = 0.38; cbh = 0.203
+	cbx = 0.1733; cbw = 0.652; cby = 0.34; cbh = 0.24
 	t1x = 0.318; t1y = 0.665
 	t2x = 0.685; t2y = 0.664
 	t3x = 0.008; t3y = 0.77
 	t4x = 0.899; t4y = 0.77
 	t5x = 0.908; t5y = 0.55
-	t9y = -1.2
+	t9y = -1.0
 	pngfile = "temporary_cbar.png"
 
 if(imgsize == '1000'):
@@ -66,13 +66,13 @@ if(imgsize == '1000'):
 	figdpi = 72
 	fsiz1 = 12
 	fsiz2 = 11
-	cbx = 0.296; cbw = 0.408; cby = 0.38; cbh = 0.203
+	cbx = 0.2975; cbw = 0.4045; cby = 0.34; cbh = 0.24
 	t1x = 0.387; t1y = 0.665
 	t2x = 0.615; t2y = 0.664
 	t3x = 0.004; t3y = 0.77
 	t4x = 0.938; t4y = 0.77
 	t5x = 0.944; t5y = 0.55
-	t9y = -1.2
+	t9y = -1.0
 	pngfile = "temporary_cbar.png"
 
 if(imgsize == 'DIY'):

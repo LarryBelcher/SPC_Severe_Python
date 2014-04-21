@@ -26,8 +26,8 @@ def int2month(mmi):
 	return mms
 
 
-imgday = sys.argv[1]
-imgsize = sys.argv[2]
+imgday = sys.argv[1]	#expects a day of year, e.g., 135
+imgsize = sys.argv[2]	#(expects 620, 1000, DIY, HD, or HDSD)
 
 day_number = int(sys.argv[1])
 data_index = day_number - 1
@@ -69,7 +69,7 @@ if(imgsize == '620' or imgsize == '1000'):
 	img_path = '../Images/'+imgsize+'/'
 	imgw = str(im3.size[0])
 	imgh = str(im3.size[1])
-	img_name = 'spcsevereprobability--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
+	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile
 	im3.save(pngfile)
@@ -81,16 +81,16 @@ if(imgsize == 'DIY'):
 	imgw = str(imgs.size[0])
 	imgh = str(imgs.size[1])
 	img_path = '../Images/'+imgsize+'/'
-	img_name = 'spcsevereprobability--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
+	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
 	cmd = 'mv '+im1+' '+img_name
 	os.system(cmd)
 	im2 = "./temporary_cbar.eps"
-	cbar_name = 'spcsevereprobability--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'_colorbar.eps'
+	cbar_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'_colorbar.eps'
 	cmd = 'mv '+im2+' '+cbar_name
 	os.system(cmd)	
-	cmd1 = 'zip spcsevereprobability--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.zip '+img_name+' '+cbar_name+' noaa_logo.eps '
+	cmd1 = 'zip probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.zip '+img_name+' '+cbar_name+' noaa_logo.eps '
 	os.system(cmd1)
-	cmd2 = 'mv spcsevereprobability--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.zip '+img_path
+	cmd2 = 'mv probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.zip '+img_path
 	os.system(cmd2)
 	cmd3 = 'rm '+img_name+' '+cbar_name
 	os.system(cmd3)
@@ -114,10 +114,10 @@ if(imgsize == 'HD'):
 	draw = ImageDraw.Draw(hdim)
 	fntpath = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf'
 	fnt1 = ImageFont.truetype(fntpath, 37)
-	draw.text((207,777), mmdd, (0,0,0), font=fnt1)
+	draw.text((205,775), mmdd, (0,0,0), font=fnt1)
 	fnt2 = ImageFont.truetype(fntpath, 14)
 	ttext = "Based on storms from 1982-2011"
-	draw.text((210,815), ttext, (0,0,0), font=fnt2)	
+	draw.text((207,817), ttext, (0,0,0), font=fnt2)	
 	
 	#Add the colorbar
 	cbar_orig = Image.open('temporary_cbar.png')
@@ -135,14 +135,14 @@ if(imgsize == 'HD'):
 	draw.text((625,915), text1, (0,0,0), font=fnt3)	
 	fnt4 = ImageFont.truetype(fntpath, 24)
 	text2 = "1%"
-	draw.text((468,915), text2, (0,0,0), font=fnt4)
+	draw.text((468,913), text2, (0,0,0), font=fnt4)
 	text3 = "10%"
-	draw.text((1420,915), text3, (0,0,0), font=fnt4)
+	draw.text((1420,913), text3, (0,0,0), font=fnt4)
 	
 	draw.polygon([(1300,949), (1315,939), (1300,929)], fill="black", outline="black")
 	
 	img_path = '../Images/'+imgsize+'/'
-	img_name = 'spcsevereprobability--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
+	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile
 	hdim.save(pngfile)
@@ -166,10 +166,10 @@ if(imgsize == 'HDSD'):
 	draw = ImageDraw.Draw(hdim)
 	fntpath = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf'
 	fnt1 = ImageFont.truetype(fntpath, 37)
-	draw.text((395,739), mmdd, (0,0,0), font=fnt1)
+	draw.text((397,739), mmdd, (0,0,0), font=fnt1)
 	fnt2 = ImageFont.truetype(fntpath, 14)
 	ttext = "Based on storms from 1982-2011"
-	draw.text((398,778), ttext, (0,0,0), font=fnt2)	
+	draw.text((399,781), ttext, (0,0,0), font=fnt2)	
 	
 	#Add the colorbar
 	cbar_orig = Image.open('temporary_cbar.png')
@@ -187,14 +187,14 @@ if(imgsize == 'HDSD'):
 	draw.text((625,880), text1, (0,0,0), font=fnt3)	
 	fnt4 = ImageFont.truetype(fntpath, 24)
 	text2 = "1%"
-	draw.text((468,880), text2, (0,0,0), font=fnt4)
+	draw.text((468,878), text2, (0,0,0), font=fnt4)
 	text3 = "10%"
-	draw.text((1420,880), text3, (0,0,0), font=fnt4)
+	draw.text((1420,878), text3, (0,0,0), font=fnt4)
 	
 	draw.polygon([(1300,914), (1315,904), (1300,894)], fill="black", outline="black")
 	
 	img_path = '../Images/'+imgsize+'/'
-	img_name = 'spcsevereprobability--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
+	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile
 	hdim.save(pngfile)

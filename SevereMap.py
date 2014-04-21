@@ -79,11 +79,11 @@ if(imgsize == '1000'):
 	bgcol = '#F5F5F5'
 
 if(imgsize == 'DIY'):
-	figxsize = 56.89
-	figysize = 36.435
-	figdpi = 72
+	figxsize = 13.655
+	figysize = 8.745
+	figdpi = 300
 	lllon, lllat, urlon, urlat = [-119.8939, 21.6678, -62.3094, 49.1895]
-	logo_image = './noaa_logo_42.png'
+	logo_image = './noaa_logo.eps'
 	logo_x = 946
 	logo_y = 4
 	framestat = 'False'
@@ -97,8 +97,8 @@ if(imgsize == 'HD'):
 	figdpi = 72
 	lllon, lllat, urlon, urlat = [-123.89399, 19.66787, -53.30945, 48.18950]
 	logo_image = './noaa_logo_100.png'
-	logo_x = 1421
-	logo_y = 35
+	logo_x = 1426
+	logo_y = 29
 	framestat = 'True'
 	base_img = './CONUS_HD_BaseLayer.png'
 	line_img = './CONUS_HD_stateLines.png'
@@ -111,8 +111,8 @@ if(imgsize == 'HDSD'):
 	figdpi = 72
 	lllon, lllat, urlon, urlat = [-120.8000, 19.5105, -57.9105, 48.9905]
 	logo_image = './noaa_logo_100.png'
-	logo_x = 1037
-	logo_y = 35
+	logo_x = 1042
+	logo_y = 29
 	framestat = 'True'
 	base_img = './CONUS_HDSD_BaseLayer.png'
 	line_img = './CONUS_HDSD_stateLines.png'
