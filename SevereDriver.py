@@ -142,7 +142,7 @@ if(imgsize == 'HD'):
 	draw.polygon([(1300,949), (1315,939), (1300,929)], fill="black", outline="black")
 	
 	img_path = '../Images/'+imgsize+'/'
-	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
+	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'hd--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile
 	hdim.save(pngfile)
@@ -194,7 +194,7 @@ if(imgsize == 'HDSD'):
 	draw.polygon([(1300,914), (1315,904), (1300,894)], fill="black", outline="black")
 	
 	img_path = '../Images/'+imgsize+'/'
-	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
+	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'hdsd--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile
 	hdim.save(pngfile)
