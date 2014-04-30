@@ -22,7 +22,7 @@ Program Usage:
 
 Image production begins by executing SevereDriver.py, which will create a daily image of 
 a desired size. The possible image sizes (in pixel width) include 620px, 1000px, 4096px 
-(DIY), 1920px (HD, or HDSD). An example call to the driver routine routine:
+(DIY), 1920px (HD, or HDSD). An example call to the driver routine:
 
 “path to python”  SevereDriver.py “day of year” “image size”
 
