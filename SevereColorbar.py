@@ -126,7 +126,7 @@ if(imgsize == '620' or imgsize == '1000' or imgsize == 'DIY'):
 
 #Define the color palette
 cmap = plt.cm.YlOrRd
-levs = np.asarray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) / 100.
+levs = np.asarray([1, 2, 3, 4, 5, 6, 7, 8]) / 100.
 #norm = colors.Normalize(levs[0], levs[-1])
 norm = mpl.colors.BoundaryNorm(levs, cmap.N)
 ax2 = fig.add_axes([cbx,cby,cbw,cbh], axisbg='#F5F5F5')
@@ -137,9 +137,9 @@ ax2.set_yticks([])
 ax2.set_yticklabels([])
 
 if(imgsize == '620' or imgsize == '1000' or imgsize == 'DIY'):
-	ax2.text(0.88, t9y , r'9', fontsize=fsiz2)
-	barticks = (np.arange(10)+1)/100.
-	barlevs = ['1', '2', '3', '4', '5', '6', '7', '8', '', '10']
+	#ax2.text(0.88, t9y , r'9', fontsize=fsiz2)
+	barticks = (np.arange(8)+1)/100.
+	barlevs = ['1', '2', '3', '4', '5', '6', '7', '8']
 	bar = mpl.colorbar.ColorbarBase(ax2, cmap=cmap, norm=norm, orientation='horizontal', ticks=barticks)
 	bar.outline.set_visible(True)
 	bar.outline.set_linewidth(0.6)
@@ -147,8 +147,8 @@ if(imgsize == '620' or imgsize == '1000' or imgsize == 'DIY'):
 	bar.ax.set_xticklabels(barlevs, fontproperties=propr, size=fsiz2, va='top')
 
 if(imgsize == 'HD' or imgsize == 'HDSD'):
-	barticks = (np.arange(10)+1)/100.
-	barlevs = ['', '', '', '', '', '', '', '', '', '']
+	barticks = (np.arange(8)+1)/100.
+	barlevs = ['', '', '', '', '', '', '','']
 	bar = mpl.colorbar.ColorbarBase(ax2, cmap=cmap, norm=norm, orientation='horizontal', ticks=barticks)
 	bar.outline.set_visible(True)
 	bar.outline.set_linewidth(0.6)

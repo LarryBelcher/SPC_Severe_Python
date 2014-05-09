@@ -136,8 +136,8 @@ if(imgsize == 'HD'):
 	fnt4 = ImageFont.truetype(fntpath, 24)
 	text2 = "1%"
 	draw.text((468,913), text2, (0,0,0), font=fnt4)
-	text3 = "10%"
-	draw.text((1420,913), text3, (0,0,0), font=fnt4)
+	text3 = "8%"
+	draw.text((1435,913), text3, (0,0,0), font=fnt4)
 	
 	draw.polygon([(1300,949), (1315,939), (1300,929)], fill="black", outline="black")
 	
@@ -188,8 +188,8 @@ if(imgsize == 'HDSD'):
 	fnt4 = ImageFont.truetype(fntpath, 24)
 	text2 = "1%"
 	draw.text((468,878), text2, (0,0,0), font=fnt4)
-	text3 = "10%"
-	draw.text((1420,878), text3, (0,0,0), font=fnt4)
+	text3 = "8%"
+	draw.text((1435,878), text3, (0,0,0), font=fnt4)
 	
 	draw.polygon([(1300,914), (1315,904), (1300,894)], fill="black", outline="black")
 	

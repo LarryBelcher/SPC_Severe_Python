@@ -154,7 +154,7 @@ m.imshow(outline_im, origin='upper', aspect='auto')
 
 
 xx, yy = m(lons, lats)
-levs = np.asarray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) / 100.
+levs = np.asarray([1, 2, 3, 4, 5, 6, 7, 8]) / 100.
 norm = colors.Normalize(levs[0], levs[-1])
 
 #Define the color palette
