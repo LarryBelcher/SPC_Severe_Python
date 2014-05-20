@@ -7,7 +7,7 @@ from PIL import ImageDraw
 from PIL import ImageFont
 import os, datetime, sys
 import numpy as np
-import _imaging
+#import _imaging
 
 
 def int2month(mmi):
