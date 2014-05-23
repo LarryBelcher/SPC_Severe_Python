@@ -55,8 +55,8 @@ os.system(cmd)
 if not os.path.isdir('../Images'):
 	cmd = 'mkdir ../Images'
 	os.system(cmd)
-if not os.path.isdir('../Images/'+imgsize):
-	cmd = 'mkdir ../Images/'+imgsize
+if not os.path.isdir('../Images/'+imgsize.lower()):
+	cmd = 'mkdir ../Images/'+imgsize.lower()
 	os.system(cmd)
 
 
@@ -66,7 +66,7 @@ if(imgsize == '620' or imgsize == '1000'):
 	im3 = Image.new('RGBA', size = (im1.size[0], im1.size[1]+im2.size[1]))
 	im3.paste(im2, (0,im1.size[1]))
 	im3.paste(im1, (0,0))
-	img_path = '../Images/'+imgsize+'/'
+	img_path = '../Images/'+imgsize.lower()+'/'
 	imgw = str(im3.size[0])
 	imgh = str(im3.size[1])
 	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
@@ -80,7 +80,7 @@ if(imgsize == 'DIY'):
 	imgs = Image.open(im1)
 	imgw = str(imgs.size[0])
 	imgh = str(imgs.size[1])
-	img_path = '../Images/'+imgsize+'/'
+	img_path = '../Images/'+imgsize.lower()+'/'
 	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
 	cmd = 'mv '+im1+' '+img_name
 	os.system(cmd)
@@ -141,7 +141,7 @@ if(imgsize == 'HD'):
 	
 	draw.polygon([(1300,949), (1315,939), (1300,929)], fill="black", outline="black")
 	
-	img_path = '../Images/'+imgsize+'/'
+	img_path = '../Images/'+imgsize.lower()+'/'
 	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'hd--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile
@@ -193,7 +193,7 @@ if(imgsize == 'HDSD'):
 	
 	draw.polygon([(1300,914), (1315,904), (1300,894)], fill="black", outline="black")
 	
-	img_path = '../Images/'+imgsize+'/'
+	img_path = '../Images/'+imgsize.lower()+'/'
 	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'hdsd--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile
