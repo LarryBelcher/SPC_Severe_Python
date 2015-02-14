@@ -120,7 +120,9 @@ if(imgsize == '620' or imgsize == '1000' or imgsize == 'DIY'):
 	plt.text(t1x, t1y, dval, fontproperties=propb, size=fsiz1, color='#333333')
 	plt.text(t2x, t2y, "($\%$)", fontproperties=propr, size=fsiz1, color='#333333')
 
-	plt.text(t3x, t3y, mmdd, fontproperties=propr, size=fsiz2, color='#8D8D8D')
+	plt.text(t3x, t3y, mmdd, fontproperties=propb, size=fsiz2, color='#8D8D8D')
+	plt.text(t3x, t3y-0.22, 'Based on storms', fontproperties=propr, size=fsiz2, color='#8D8D8D')
+	plt.text(t3x, t3y-0.44, 'from 1982-2011', fontproperties=propr, size=fsiz2, color='#8D8D8D')
 	plt.text(t4x, t4y, 'Climate.gov', fontproperties=propr, size=fsiz2, color='#8D8D8D')
 	plt.text(t5x, t5y, 'Data: SPC', fontproperties=propr, size=fsiz2, color='#8D8D8D')
 
