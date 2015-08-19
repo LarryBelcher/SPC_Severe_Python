@@ -115,6 +115,7 @@ ax1.set_yticks([])
 ax1.set_yticklabels([])
 
 
+
 if(imgsize == '620' or imgsize == '1000' or imgsize == 'DIY'):
 	dval = "Historical Probability of Severe Weather"
 	plt.text(t1x, t1y, dval, fontproperties=propb, size=fsiz1, color='#333333')

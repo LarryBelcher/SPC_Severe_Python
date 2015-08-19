@@ -102,14 +102,14 @@ if(imgsize == 'HD'):
 	imgh = '1080'
 	
 	im1 = Image.open("temporary_map.png")
-	bbox = (1,1,1535,738)
+	bbox = (0,0,1534,736)
 	im1 = im1.crop(bbox)
 	osize = im1.size
 	new_size = (osize[0]+2,osize[1]+2)
 	im1new = Image.new("RGB", new_size)
 	im1new.paste(im1, ((new_size[0]-osize[0])/2, (new_size[1]-osize[1])/2))
 		
-	hdim.paste(im1new, (192,107))
+	hdim.paste(im1new, (192,108))
 	
 	draw = ImageDraw.Draw(hdim)
 	fntpath = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf'
@@ -154,14 +154,14 @@ if(imgsize == 'HDSD'):
 	imgh = '1080'
 	
 	im1 = Image.open("temporary_map.png")
-	bbox = (1,1,1152,702)
+	bbox = (0,0,1150,700)
 	im1 = im1.crop(bbox)
 	osize = im1.size
 	new_size = (osize[0]+2,osize[1]+2)
 	im1new = Image.new("RGB", new_size)
 	im1new.paste(im1, ((new_size[0]-osize[0])/2, (new_size[1]-osize[1])/2))
 		
-	hdim.paste(im1new, (384,107))
+	hdim.paste(im1new, (384,108))
 	
 	draw = ImageDraw.Draw(hdim)
 	fntpath = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf'
