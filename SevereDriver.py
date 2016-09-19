@@ -5,9 +5,9 @@ mpl.use('Agg')
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
-import os, datetime, sys
+import os, datetime, sys, subprocess, glob
 import numpy as np
-#import _imaging
+
 
 
 def int2month(mmi):
@@ -44,20 +44,20 @@ mmdd = mms+' '+dd
 
 figdpi = 72
 
-cmd = "/usr/bin/python ./SevereMap.py "+imgday+" "+imgsize
+cmd = "python ./SevereMap.py "+imgday+" "+imgsize
 os.system(cmd)
 
-
-cmd = "/usr/bin/python ./SevereColorbar.py "+imgday+" "+imgsize
-os.system(cmd)
-
-
-if not os.path.isdir('../Images'):
-	cmd = 'mkdir ../Images'
+if(imgsize != 'GEO'):
+	cmd = "python ./SevereColorbar.py "+imgday+" "+imgsize
 	os.system(cmd)
-if not os.path.isdir('../Images/'+imgsize.lower()):
-	cmd = 'mkdir ../Images/'+imgsize.lower()
-	os.system(cmd)
+
+if(imgsize != 'GEO'):
+	if not os.path.isdir('./Images'):
+		cmd = 'mkdir ./Images'
+		os.system(cmd)
+	if not os.path.isdir('./Images/'+imgsize.lower()):
+		cmd = 'mkdir ./Images/'+imgsize.lower()
+		os.system(cmd)
 
 
 if(imgsize == '620' or imgsize == '1000'):
@@ -66,7 +66,7 @@ if(imgsize == '620' or imgsize == '1000'):
 	im3 = Image.new('RGBA', size = (im1.size[0], im1.size[1]+im2.size[1]))
 	im3.paste(im2, (0,im1.size[1]))
 	im3.paste(im1, (0,0))
-	img_path = '../Images/'+imgsize.lower()+'/'
+	img_path = './Images/'+imgsize.lower()+'/'
 	imgw = str(im3.size[0])
 	imgh = str(im3.size[1])
 	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
@@ -80,20 +80,35 @@ if(imgsize == 'DIY'):
 	imgs = Image.open(im1)
 	imgw = str(imgs.size[0])
 	imgh = str(imgs.size[1])
-	img_path = '../Images/'+imgsize.lower()+'/'
+	img_path = './Images/'+imgsize.lower()+'/'
 	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.png'
 	cmd = 'mv '+im1+' '+img_name
-	os.system(cmd)
+	subprocess.call(cmd, shell=True)
 	im2 = "./temporary_cbar.eps"
 	cbar_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'_colorbar.eps'
 	cmd = 'mv '+im2+' '+cbar_name
-	os.system(cmd)	
+	subprocess.call(cmd, shell=True)
 	cmd1 = 'zip probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.zip '+img_name+' '+cbar_name+' noaa_logo.eps '
-	os.system(cmd1)
+	subprocess.call(cmd1, shell=True)
 	cmd2 = 'mv probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'--0000-'+mm+'-'+dd+'.zip '+img_path
-	os.system(cmd2)
+	subprocess.call(cmd2, shell=True)
 	cmd3 = 'rm '+img_name+' '+cbar_name
-	os.system(cmd3)
+	subprocess.call(cmd3, shell=True)
+	
+if(imgsize == 'GEO'):
+	im1 = "./temporary_map.tif"
+	tifimgs = Image.open(im1)
+	tifimgw = str(tifimgs.size[0])
+	tifimgh = str(tifimgs.size[1])
+	tifimg_name = 'probseverewx-dayofyear-spc--'+tifimgw+'x'+tifimgh+'--0000-'+mm+'-'+dd+'.tif'
+	cmd = 'gdal_translate -of GTiff -a_srs EPSG:4326  -a_ullr -179.9853516 74.9853516 -59.9853516 14.9853516 '+im1+' '+tifimg_name
+	subprocess.call(cmd,shell=True)
+	zpath = './Images/diy/*0000-'+mm+'-'+dd+'.zip'
+	zipfile = glob.glob(zpath)
+	cmd = 'zip -u '+zipfile[0]+' '+tifimg_name
+	subprocess.call(cmd,shell=True)
+	cmd1 = 'rm '+tifimg_name
+	subprocess.call(cmd1, shell=True)
 	
 	
 if(imgsize == 'HD'):
@@ -112,7 +127,7 @@ if(imgsize == 'HD'):
 	hdim.paste(im1new, (192,108))
 	
 	draw = ImageDraw.Draw(hdim)
-	fntpath = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf'
+	fntpath = './Fonts/Trebuchet_MS.ttf'
 	fnt1 = ImageFont.truetype(fntpath, 37)
 	draw.text((205,775), mmdd, (0,0,0), font=fnt1)
 	fnt2 = ImageFont.truetype(fntpath, 14)
@@ -141,7 +156,7 @@ if(imgsize == 'HD'):
 	
 	draw.polygon([(1300,949), (1315,939), (1300,929)], fill="black", outline="black")
 	
-	img_path = '../Images/'+imgsize.lower()+'/'
+	img_path = './Images/'+imgsize.lower()+'/'
 	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'hd--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile
@@ -164,7 +179,7 @@ if(imgsize == 'HDSD'):
 	hdim.paste(im1new, (384,108))
 	
 	draw = ImageDraw.Draw(hdim)
-	fntpath = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf'
+	fntpath = './Fonts/Trebuchet_MS.ttf'
 	fnt1 = ImageFont.truetype(fntpath, 37)
 	draw.text((397,739), mmdd, (0,0,0), font=fnt1)
 	fnt2 = ImageFont.truetype(fntpath, 14)
@@ -193,7 +208,7 @@ if(imgsize == 'HDSD'):
 	
 	draw.polygon([(1300,914), (1315,904), (1300,894)], fill="black", outline="black")
 	
-	img_path = '../Images/'+imgsize.lower()+'/'
+	img_path = './Images/'+imgsize.lower()+'/'
 	img_name = 'probseverewx-dayofyear-spc--'+imgw+'x'+imgh+'hdsd--0000-'+mm+'-'+dd+'.png'
 	pngfile = img_path+img_name
 	print "Saving "+pngfile

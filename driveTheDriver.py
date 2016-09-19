@@ -3,15 +3,16 @@
 import numpy as np
 import os
 
-imgsize = 'HDSD'
+imgsize = ['DIY','GEO']
 
 print '#!/bin/csh'
 print ' '
 for i in range(366):
 	imgday = str(i+1)
-	cmd = "python SevereDriver.py "+imgday+" "+imgsize
-	print cmd
-	#os.system(cmd)
+	for j in range(len(imgsize)):
+		cmd = "python SevereDriver.py "+imgday+" "+imgsize[j]
+		print cmd
+		#os.system(cmd)
 
 print ' '
 print 'exit'

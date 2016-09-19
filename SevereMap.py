@@ -47,9 +47,9 @@ lats = f['lats']
 probs = f['probs']
 del f
 
-path = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf'
+path = './Fonts/Trebuchet_MS.ttf'
 propr = font_manager.FontProperties(fname=path)
-path = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS_Bold.ttf'
+path = './Fonts/Trebuchet_MS_Bold.ttf'
 propb = font_manager.FontProperties(fname=path)
 
 if(imgsize == '620'):
@@ -119,6 +119,14 @@ if(imgsize == 'HDSD'):
 	framestat = 'False'
 	bgcol = '#F5F5F5'
 
+if(imgsize == 'GEO'):
+	figxsize = 13.655
+	figysize = 8.745
+	figdpi = 300
+	lllon, lllat, urlon, urlat = [-179.9853516, 14.9853516, -59.9853516, 74.9853516]
+	framestat = 'False'
+	base_img = './trans.tif'
+	bgcol = 'none'
 
 fig = plt.figure(figsize=(figxsize,figysize))
 # create an axes instance, leaving room for colorbar at bottom.
@@ -128,21 +136,39 @@ ax1.spines['right'].set_visible(False)
 ax1.spines['bottom'].set_visible(False)
 ax1.spines['top'].set_visible(False)
 
-# Create Map and Projection Coordinates
-kwargs = {'epsg' : 5070,
-          'resolution' : 'i',
-          'llcrnrlon' : lllon,
-          'llcrnrlat' : lllat,
-          'urcrnrlon' : urlon,
-          'urcrnrlat' : urlat,
-          'lon_0' : -96.,
-          'lat_0' : 23.,
-          'lat_1' : 29.5,
-          'lat_2' : 45.5,
-		  'area_thresh' : 15000,
-		  'ax' : ax1,
-		  'fix_aspect' : False
-}
+if(imgsize != 'GEO'):
+	# Create Map and Projection Coordinates
+	kwargs = {'epsg' : 5070,
+	          'resolution' : 'i',
+	          'llcrnrlon' : lllon,
+	          'llcrnrlat' : lllat,
+	          'urcrnrlon' : urlon,
+	          'urcrnrlat' : urlat,
+	          'lon_0' : -96.,
+	          'lat_0' : 23.,
+	          'lat_1' : 29.5,
+	          'lat_2' : 45.5,
+			  'area_thresh' : 15000,
+			  'ax' : ax1,
+			  'fix_aspect' : False
+	}
+
+#Set up the base map for the geotif
+if(imgsize == 'GEO'):
+	# Create Map and Projection Coordinates
+	kwargs = {'epsg' : '4326',
+	          'resolution' : 'i',
+	          'llcrnrlon' : lllon,
+	          'llcrnrlat' : lllat,
+	          'urcrnrlon' : urlon,
+	          'urcrnrlat' : urlat,
+	          'lon_0' : -119.9853516,
+	          'lat_0' : 44.9853516,
+			  'area_thresh' : 15000,
+			  'ax' : ax1,
+			  'fix_aspect' : False
+	}
+
 
 #Set up the Basemap
 m =Basemap(**kwargs)
@@ -164,28 +190,32 @@ cmap = plt.cm.YlOrRd
 #cdict1 = gmtColormap('./CPT/BuPu_09.cpt')
 #cmap = LinearSegmentedColormap('this_cmap', cdict1)
 
-cdat = m.contourf(xx, yy, probs[data_index], levs, ax=ax1, cmap=cmap, norm=norm, alpha=0.55)
-#call contourf again to eliminate lines (some magic I dug up form google, seems to work...)
-cdat1 = m.contourf(xx, yy, probs[data_index], levs, ax=ax1, cmap=cmap, norm=norm, alpha=0.55)
+if(imgsize != 'GEO'):
+	cdat = m.contourf(xx, yy, probs[data_index], levs, ax=ax1, cmap=cmap, norm=norm, alpha=0.55)
+	#call contourf again to eliminate lines (some magic I dug up form google, seems to work...)
+	cdat1 = m.contourf(xx, yy, probs[data_index], levs, ax=ax1, cmap=cmap, norm=norm, alpha=0.55)
 
 
-#Add the Line image
-outline_im = Image.open(line_img)
-m.imshow(outline_im, origin='upper', alpha=0.75, zorder=10, aspect='auto')
+	#Add the Line image
+	outline_im = Image.open(line_img)
+	m.imshow(outline_im, origin='upper', alpha=0.75, zorder=10, aspect='auto')
 
 
-#Add the NOAA logo (except for DIY)
-if(imgsize != 'DIY'):
-	logo_im = Image.open(logo_image)
-	height = logo_im.size[1]
-	# We need a float array between 0-1, rather than
-	# a uint8 array between 0-255 for the logo
-	logo_im = np.array(logo_im).astype(np.float) / 255
-	fig.figimage(logo_im, logo_x, logo_y, zorder=10)
+	#Add the NOAA logo (except for DIY)
+	if(imgsize != 'DIY'):
+		logo_im = Image.open(logo_image)
+		height = logo_im.size[1]
+		# We need a float array between 0-1, rather than
+		# a uint8 array between 0-255 for the logo
+		logo_im = np.array(logo_im).astype(np.float) / 255
+		fig.figimage(logo_im, logo_x, logo_y, zorder=10)
 
+if(imgsize == 'GEO'):
+	cdat = m.contourf(xx, yy, probs[data_index], levs, ax=ax1, cmap=cmap, norm=norm)
 
 
 outpng = "temporary_map.png"
+outtif = "temporary_map.tif"
 
 if(imgsize == '620' or imgsize == '1000' or imgsize == 'DIY'):
 	plt.savefig(outpng,dpi=figdpi, orientation='landscape', bbox_inches='tight', pad_inches=0.00)
@@ -193,4 +223,5 @@ if(imgsize == '620' or imgsize == '1000' or imgsize == 'DIY'):
 if(imgsize == 'HD' or imgsize =='HDSD'):
 	plt.savefig(outpng, dpi=figdpi, orientation='landscape')#, bbox_inches='tight', pad_inches=0.01)
 
-
+if(imgsize == 'GEO'):
+	plt.savefig(outtif, dpi=figdpi, orientation='landscape', transparent='true', bbox_inches='tight', pad_inches=0.00)

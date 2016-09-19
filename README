@@ -34,6 +34,7 @@ Valid “image size” values are:
 620 (620px wide image)
 1000 (1000px wide image)
 DIY (4096px wide image)
+GEO (4096px wide geotif, added to the DIY zip *** DIY must already exists)
 HD (1920px wide image in high definition)
 HDSD (1920px wide image suitable for either high definition or standard definition
 
@@ -62,17 +63,6 @@ matplotlib.font_manager (in order to utilize the true type font MS Trebuchet, wh
 Other files in this project:
 colorbar and logo (.png and .eps) files included here are sized for each of the image 
 sizes and are used by the various python scripts that produce the reprojected images
-
-
-
-Notes on portability:
-
-1) All image making scripts in the project need the path to Trebuchet MS true-type font.
-e.g.,
-
-	/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf
-
-	*This path depends entirely on the location the sysadmin installs “add-on” fonts.
 
 
 

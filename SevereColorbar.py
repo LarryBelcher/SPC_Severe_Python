@@ -40,9 +40,9 @@ mmdd = mms+' '+dd
 
 imgsize = sys.argv[2]   #(expects 620, 1000, DIY, HD, or HDSD)
 
-path = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS.ttf'
+path = './Fonts/Trebuchet_MS.ttf'
 propr = font_manager.FontProperties(fname=path)
-path = '/usr/local/share/fonts/truetype/msttcorefonts/Trebuchet_MS_Bold.ttf'
+path = './Fonts/Trebuchet_MS_Bold.ttf'
 propb = font_manager.FontProperties(fname=path)
 
 if(imgsize == '620'):
